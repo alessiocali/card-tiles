@@ -50,8 +50,8 @@ function createCardTile(cardEventData) {
         "actions" : [ createCardCycleAction(card) ]
     };
 
-    let width = card.width || 100;
-    let height = card.height || 100;
+    let width = card.data.width || 100;
+    let height = card.data.height || 100;
 
     let cardTileData = {
         x : cardEventData.x - width / 2,
