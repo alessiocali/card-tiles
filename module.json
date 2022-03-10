@@ -1,0 +1,41 @@
+{
+  "name": "card-tiles",
+  "title": "Card Tiles",
+  "description": "Makes use of Monk's Active Tiles to create an interactable Card tile from your Card collections.",
+  "version": "This is auto replaced",
+  "library": "false",
+  "manifestPlusVersion": "1.0.0",
+  "minimumCoreVersion": "9",
+  "compatibleCoreVersion": "9",
+  "authors": [
+    {
+      "name": "Alessio Giuseppe Cali'",
+      "url": "https://github.com/alessiocali"
+    }
+  ],
+  "dependencies": [
+    {
+      "name": "monks-active-tiles",
+      "manifest": "https://github.com/ironmonk88/monks-active-tiles/releases/latest/download/module.json"
+    }
+  ],
+  "conflicts": [
+    {
+      "name": "Foundry-VTT-Drag-Upload",
+      "manifest": "https://github.com/cswendrowski/FoundryVTT-Drag-Upload/releases/download/2.1.1/module.json"
+    }
+  ],
+  "esmodules": [
+    "/scripts/module.js"
+  ],
+  "languages": [
+    {
+      "lang": "en",
+      "name": "English",
+      "path": "languages/en.json"
+    }
+  ],
+  "url": "This is auto replaced",
+  "manifest": "This is auto replaced",
+  "download": "This is auto replaced"
+}
