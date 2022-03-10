@@ -63,7 +63,6 @@ function createCardTile(cardEventData) {
         flags : { "monks-active-tiles" : monkFlags }
     };
 
-    console.log(cardTileData)
     canvas.scene.createEmbeddedDocuments("Tile", [ cardTileData ]);
 }
 
