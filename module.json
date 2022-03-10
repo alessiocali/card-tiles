@@ -35,7 +35,7 @@
       "path": "languages/en.json"
     }
   ],
-  "url": "This is auto replaced",
-  "manifest": "This is auto replaced",
-  "download": "This is auto replaced"
+  "url": "https://github.com/alessiocali/card-tiles",
+  "manifest": "https://github.com/alessiocali/card-tiles/releases/download/latest/module.json",
+  "download": "https://github.com/alessiocali/card-tiles/releases/download/latest/module.zip"
 }
