@@ -7,6 +7,9 @@ Allows you to Drag-n-Drop Cards from you Card Collections onto the game board an
 * Remove dependency from Monk's plugin (no hard feelings, but less dependencies the better).
 
 ## Changelog
+### v0.0.2
+Fixed tile size being incorrect even when card size is set.
+
 ### v0.0.1
 Initial release with bare minimum support.
 
