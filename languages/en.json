@@ -1,1 +1,4 @@
-{ }
+{ 
+    "CardTiles.Settings.Scaling.Name" : "Default Card Scaling",
+    "CardTiles.Settings.Scaling.Hint" : "Set a default scaling to apply to all card tiles when generated."
+}

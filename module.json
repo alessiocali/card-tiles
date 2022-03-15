@@ -19,7 +19,9 @@
     }
   ],
   "esmodules": [
-    "./scripts/module.js"
+    "./scripts/card-tiles.js",
+    "./scripts/settings.js",
+    "./scripts/constants.js"
   ],
   "languages": [
     {

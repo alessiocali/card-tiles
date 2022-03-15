@@ -1,6 +1,6 @@
-Hooks.once('ready', async function() {
-    registerDragDropHandler();
-});
+import * as CardTilesConstants from "./constants.js"
+
+Hooks.once('ready', registerDragDropHandler);
 
 function registerDragDropHandler() {
     let dragDropConfig = {
@@ -50,8 +50,9 @@ function createCardTile(cardEventData) {
         "actions" : [ createCardCycleAction(card) ]
     };
 
-    let width = card.data.width || 100;
-    let height = card.data.height || 100;
+    const scaling = game.settings.get(CardTilesConstants.MODULE_NAME, CardTilesConstants.Settings.SCALING_NAME) || 1.0;
+    let width = (card.data.width || 100) * scaling;
+    let height = (card.data.height || 100) * scaling;
 
     let cardTileData = {
         x : cardEventData.x - width / 2,
