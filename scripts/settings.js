@@ -10,7 +10,7 @@ async function registerScaling() {
     await game.settings.register(CardTilesConstants.MODULE_NAME, CardTilesConstants.Settings.SCALING_NAME, {
         name: game.i18n.localize("CardTiles.Settings.Scaling.Name"),
         hint: game.i18n.localize("CardTiles.Settings.Scaling.Hint"),
-        scope: "client",
+        scope: "world",
         config: true,
         type: Number,
         default: 1.0,
