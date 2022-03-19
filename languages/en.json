@@ -1,4 +1,13 @@
 { 
+    "CardTiles.General.DefaulBoardStackName" : "Board Stack",
+
+    "CardTiles.Notifications.Warnings.CardAlreadyDrawn" : "You can't deal onto the canvas a card which has already been dealt (you can disable this in the settings).",
+
     "CardTiles.Settings.Scaling.Name" : "Default Card Scaling",
-    "CardTiles.Settings.Scaling.Hint" : "Set a default scaling to apply to all card tiles when generated."
+    "CardTiles.Settings.Scaling.Hint" : "Set a default scaling to apply to all card tiles when generated.",
+    "CardTiles.Settings.PassCardToBoardStack.Name" : "Pass cards to Board Stack",
+    "CardTiles.Settings.PassCardToBoardStack.Hint" : "If set, dealing a card onto the canvas passes it to a chosen stack.",
+    "CardTiles.Settings.BoardStack.Name" : "Default Board Stack",
+    "CardTiles.Settings.BoardStack.Hint" : "Cards that are played on the board are moved to this stack. If none is set, it will create one by default.",
+    "CardTiles.Settings.BoardStack.DefaultBoardStackOption" : "None"
 }
