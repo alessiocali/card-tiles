@@ -7,6 +7,10 @@ Allows you to Drag-n-Drop Cards from you Card Collections onto the game board an
 * Remove dependency from Monk's plugin (no hard feelings, but less dependencies the better).
 
 ## Changelog
+### v0.0.3
+* Added a setting to scale uniformly card tiles when played on the canvas.
+* Added a setting to decide a target card stack where cards are going to be transferred upon being played on the canvas.
+
 ### v0.0.2
 Fixed tile size being incorrect even when card size is set.
 
