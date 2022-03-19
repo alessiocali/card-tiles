@@ -70,7 +70,7 @@ async function createCardTile(cardEventData) {
         y : cardEventData.y - height / 2,
         width : width,
         height : height,
-        img : card.back.img,
+        img : card.face?.img || card.back.img,
         hidden : false,
         flags : { "monks-active-tiles" : monkFlags }
     };
@@ -79,11 +79,17 @@ async function createCardTile(cardEventData) {
 }
 
 function createCardCycleAction(card) {
+    // Back face is null rather than 0.
+    const faceIdx = card.data.face == null ? 0 : card.data.face + 1;
+
+    // Monk's images are 1-indexed
+    const imageIdx = faceIdx + 1;
+
     return {
         "action" : "imagecycle",
         "data" : {
             "entity" : "",
-            "imgat" : 1,
+            "imgat" : imageIdx,
             "files" : buildFacesFiles(card)
         },
         "_file-list": "",
