@@ -14,32 +14,43 @@ function registerDragDropHandler() {
     new DragDrop(dragDropConfig).bind(board);
 }
 
-function onCanvasDrop(event) {
+async function onCanvasDrop(event) {
     event.preventDefault();
 
-    let eventData = JSON.parse(event.dataTransfer.getData("text/plain"));
+    const eventData = JSON.parse(event.dataTransfer.getData("text/plain"));
     if (eventData.type !== "Card") {
         canvas._dragDrop.callbacks.drop(event);
         return;
     }
 
-    let globalPosition = canvas.stage.worldTransform.applyInverse({ x: event.x, y: event.y })
+    const globalPosition = canvas.stage.worldTransform.applyInverse({ x: event.x, y: event.y })
 
-    let cardEventData = {
-        cardCollectionId : eventData.cardsId,
-        cardId : eventData.cardId,
+    const cardCollection = game.cards.get(eventData.cardsId);
+    const card = cardCollection.cards.get(eventData.cardId);
+    const cardEventData = {
+        cardCollection : cardCollection,
+        card : card,
         x : globalPosition.x,
         y : globalPosition.y
     }
 
-    createCardTile(cardEventData);
+    const shouldPassToBoard = game.settings.get(CardTilesConstants.MODULE_NAME, CardTilesConstants.Settings.PASS_CARDS_TO_BOARD_STACK);
+    if (shouldPassToBoard && card.data.drawn) {
+        ui.notifications.warn(game.i18n.localize("CardTiles.Notifications.Warnings.CardAlreadyDrawn"));
+    }
+    else if (shouldPassToBoard && !card.drawn) {
+        await createCardTile(cardEventData);
+        await moveCardToBoardStack(cardEventData);
+    }
+    else {
+        await createCardTile(cardEventData);
+    }
 }
 
-function createCardTile(cardEventData) {
-    let cardCollection = game.cards.get(cardEventData.cardCollectionId);
-    let card = cardCollection.cards.get(cardEventData.cardId);
+async function createCardTile(cardEventData) {
+    const card = cardEventData.card;
     
-    let monkFlags = {
+    const monkFlags = {
         "active" : true,
         "restriction" : "all",
         "controlled" : "all",
@@ -51,10 +62,10 @@ function createCardTile(cardEventData) {
     };
 
     const scaling = game.settings.get(CardTilesConstants.MODULE_NAME, CardTilesConstants.Settings.SCALING_NAME) || 1.0;
-    let width = (card.data.width || 100) * scaling;
-    let height = (card.data.height || 100) * scaling;
+    const width = (card.data.width || 100) * scaling;
+    const height = (card.data.height || 100) * scaling;
 
-    let cardTileData = {
+    const cardTileData = {
         x : cardEventData.x - width / 2,
         y : cardEventData.y - height / 2,
         width : width,
@@ -64,7 +75,7 @@ function createCardTile(cardEventData) {
         flags : { "monks-active-tiles" : monkFlags }
     };
 
-    canvas.scene.createEmbeddedDocuments("Tile", [ cardTileData ]);
+    await canvas.scene.createEmbeddedDocuments("Tile", [ cardTileData ]);
 }
 
 function createCardCycleAction(card) {
@@ -81,6 +92,30 @@ function createCardCycleAction(card) {
 }
 
 function buildFacesFiles(card) {
-    let allFaces = [ card.back, card.data.faces ].flat();
+    const allFaces = [ card.back, card.data.faces ].flat();
     return allFaces.map( face => { return { "id" : randomID(16), "name" : face.img  } } );
+}
+
+async function moveCardToBoardStack(cardEventData) {
+    const cardCollection = cardEventData.cardCollection;
+    const destination = await getBoardStack();
+    cardCollection.pass(destination, [cardEventData.card.id]);
+}
+
+async function getBoardStack() {
+    const destinationId = game.settings.get(CardTilesConstants.MODULE_NAME, CardTilesConstants.Settings.BOARD_STACK_NAME);
+    const destination = game.cards.has(destinationId) ? game.cards.get(destinationId) : undefined;
+    return destination || await createAndSetDefaultBoardStack();
+}
+
+async function createAndSetDefaultBoardStack() {
+    const newStackData = {
+        name: game.i18n.localize("CardTiles.General.DefaulBoardStackName"),
+        type: "pile"
+    };
+
+    const createdDocuments = await Cards.createDocuments([newStackData]);
+    const newStack = createdDocuments[0];
+    game.settings.set(CardTilesConstants.MODULE_NAME, CardTilesConstants.Settings.BOARD_STACK_NAME, newStack.id);
+    return newStack;
 }
