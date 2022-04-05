@@ -1,0 +1,13 @@
+{ 
+    "CardTiles.General.DefaulBoardStackName" : "自動作成山札",
+
+    "CardTiles.Notifications.Warnings.CardAlreadyDrawn" : "すでに配られたカードをシーンに配ることはできません（設定で無効にすることができます）。",
+
+    "CardTiles.Settings.Scaling.Name" : "基本のカードサイズ",
+    "CardTiles.Settings.Scaling.Hint" : "生成時にすべてのカードタイルに適用されるデフォルトのカードの大きさを設定します。",
+    "CardTiles.Settings.PassCardToBoardStack.Name" : "カードをマップの上の山札に重ねる",
+    "CardTiles.Settings.PassCardToBoardStack.Hint" : "チェックが入っている場合、カードをシーンに配ることで、選ばれた山札にカードを渡します",
+    "CardTiles.Settings.BoardStack.Name" : "デフォルトの山札",
+    "CardTiles.Settings.BoardStack.Hint" : "ボード上でプレイされたカードは、この山に移動されます。何も設定されていない場合は、山札が一つデフォルトとして作成されます。",
+    "CardTiles.Settings.BoardStack.DefaultBoardStackOption" : "なし"
+}
