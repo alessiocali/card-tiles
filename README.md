@@ -7,6 +7,10 @@ Allows you to Drag-n-Drop Cards from you Card Collections onto the game board an
 * Remove dependency from Monk's plugin (no hard feelings, but less dependencies the better).
 
 ## Changelog
+### v0.0.5
+* New localization: Japanese 🍙 (thanks to @BrotherSharper), Italian 🍕.
+* Added more default options for card sizes: default to deck sizes, or setting preferences (suggested in #10).
+
 ### v0.0.4
 Now cards dragged onto the canvas show their current face when played.
 
