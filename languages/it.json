@@ -9,5 +9,9 @@
     "CardTiles.Settings.PassCardToBoardStack.Hint" : "Se abilitato, una carta giocata sulla scena viene automaticamente passata alla pila designata.",
     "CardTiles.Settings.BoardStack.Name" : "Pila della Scena",
     "CardTiles.Settings.BoardStack.Hint" : "Le carte giocate sulla scena vengono passate a questa pila. Se nessuna pila è stata scelta, ne viene generata una standard.",
-    "CardTiles.Settings.BoardStack.DefaultBoardStackOption" : "Nessuna"
+    "CardTiles.Settings.BoardStack.DefaultBoardStackOption" : "Nessuna",
+    "CardTiles.Settings.DefaultWidth.Name" : "Larghezza Carte (Default)",
+    "CardTiles.Settings.DefaultWidth.Hint" : "Se né la carta né la sua pila specificano un valore di larghezza, verrà utilizzato questo valore.",
+    "CardTiles.Settings.DefaultHeight.Name" : "Altezza Carte (Default)",
+    "CardTiles.Settings.DefaultHeight.Hint" : "Se né la carta né la sua pila specificano un valore di altezza, verrà utilizzato questo valore."
 }

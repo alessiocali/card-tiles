@@ -6,6 +6,7 @@ async function registerSettings() {
     await registerScaling();
     await registerPassToBoardStack();
     await registerBoardStackSelector();
+    await registerDefaultCardSizes();
 }
 
 async function registerScaling() {
@@ -52,4 +53,24 @@ function buildCardStackSelector() {
     };
 
     return Array.from(game.cards).reduce(selectorReducer, selector);
+}
+
+async function registerDefaultCardSizes() {
+    await game.settings.register(CardTilesConstants.MODULE_NAME, CardTilesConstants.Settings.DEFAULT_HEIGHT_NAME, {
+        name: game.i18n.localize("CardTiles.Settings.DefaultHeight.Name"),
+        hint: game.i18n.localize("CardTiles.Settings.DefaultHeight.Hint"),
+        scope: "world",
+        config: true,
+        type: Number,
+        default: 100
+    });
+
+    await game.settings.register(CardTilesConstants.MODULE_NAME, CardTilesConstants.Settings.DEFAULT_WIDTH_NAME, {
+        name: game.i18n.localize("CardTiles.Settings.DefaultWidth.Name"),
+        hint: game.i18n.localize("CardTiles.Settings.DefaultWidth.Hint"),
+        scope: "world",
+        config: true,
+        type: Number,
+        default: 100
+    });
 }
