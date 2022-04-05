@@ -49,6 +49,7 @@ async function onCanvasDrop(event) {
 
 async function createCardTile(cardEventData) {
     const card = cardEventData.card;
+    const cardCollection = cardEventData.cardCollection;
     
     const monkFlags = {
         "active" : true,
@@ -62,8 +63,8 @@ async function createCardTile(cardEventData) {
     };
 
     const scaling = game.settings.get(CardTilesConstants.MODULE_NAME, CardTilesConstants.Settings.SCALING_NAME) || 1.0;
-    const width = (card.data.width || 100) * scaling;
-    const height = (card.data.height || 100) * scaling;
+    const width = (card.data.width || getDefaultWidth(cardCollection)) * scaling;
+    const height = (card.data.height || getDefaultHeight(cardCollection)) * scaling;
 
     const cardTileData = {
         x : cardEventData.x - width / 2,
@@ -100,6 +101,14 @@ function createCardCycleAction(card) {
 function buildFacesFiles(card) {
     const allFaces = [ card.back, card.data.faces ].flat();
     return allFaces.map( face => { return { "id" : randomID(16), "name" : face.img  } } );
+}
+
+function getDefaultWidth(cardCollection) {
+    return cardCollection.data.width || game.settings.get(CardTilesConstants.MODULE_NAME, CardTilesConstants.Settings.DEFAULT_WIDTH_NAME) || 100;
+}
+
+function getDefaultHeight(cardCollection) {
+    return cardCollection.data.heigh || game.settings.get(CardTilesConstants.MODULE_NAME, CardTilesConstants.Settings.DEFAULT_HEIGHT_NAME) || 100;
 }
 
 async function moveCardToBoardStack(cardEventData) {

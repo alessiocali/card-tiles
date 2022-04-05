@@ -9,5 +9,9 @@
     "CardTiles.Settings.PassCardToBoardStack.Hint" : "If set, dealing a card onto the canvas passes it to a chosen stack.",
     "CardTiles.Settings.BoardStack.Name" : "Default Board Stack",
     "CardTiles.Settings.BoardStack.Hint" : "Cards that are played on the board are moved to this stack. If none is set, it will create one by default.",
-    "CardTiles.Settings.BoardStack.DefaultBoardStackOption" : "None"
+    "CardTiles.Settings.BoardStack.DefaultBoardStackOption" : "None",
+    "CardTiles.Settings.DefaultWidth.Name" : "Default Card Width",
+    "CardTiles.Settings.DefaultWidth.Hint" : "If both the card and its deck do not provide an explicit width value, this value will be used instead.",
+    "CardTiles.Settings.DefaultHeight.Name" : "Default Card Height",
+    "CardTiles.Settings.DefaultHeight.Hint" : "If both the card and its deck do not provide an explicit height value, this value will be used instead."
 }
