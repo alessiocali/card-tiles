@@ -28,6 +28,11 @@
       "lang": "en",
       "name": "English",
       "path": "./languages/en.json"
+    },
+    {
+      "lang": "ja",
+      "name": "日本語",
+      "path": "./languages/ja.json"
     }
   ],
   "url": "https://github.com/alessiocali/card-tiles",
