@@ -35,7 +35,8 @@ async function onCanvasDrop(event) {
     }
 
     const shouldPassToBoard = game.settings.get(CardTilesConstants.MODULE_NAME, CardTilesConstants.Settings.PASS_CARDS_TO_BOARD_STACK);
-    if (shouldPassToBoard && card.data.drawn) {
+    const dealDrawn = game.settings.get(CardTilesConstants.MODULE_NAME, CardTilesConstants.Settings.DEAL_AFTER_DRAWN)
+    if (dealDrawn === false && card.data.drawn) {
         ui.notifications.warn(game.i18n.localize("CardTiles.Notifications.Warnings.CardAlreadyDrawn"));
     }
     else if (shouldPassToBoard && !card.drawn) {
