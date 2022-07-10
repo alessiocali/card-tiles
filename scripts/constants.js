@@ -5,5 +5,6 @@ export const Settings = {
     BOARD_STACK_NAME : "board-stack",
     PASS_CARDS_TO_BOARD_STACK : "pass-to-board-stack",
     DEFAULT_WIDTH_NAME : "default-card-width",
-    DEFAULT_HEIGHT_NAME : "default-card-height"
+    DEFAULT_HEIGHT_NAME : "default-card-height",
+    DEAL_AFTER_DRAWN: "deal-after-drawn"
 }

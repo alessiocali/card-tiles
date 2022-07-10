@@ -6,6 +6,7 @@ async function registerSettings() {
     await registerScaling();
     await registerPassToBoardStack();
     await registerBoardStackSelector();
+    await registerDealAfterDrawn()
     await registerDefaultCardSizes();
 }
 
@@ -41,6 +42,17 @@ async function registerBoardStackSelector() {
         type: String,
         default: "",
         choices: buildCardStackSelector
+    });
+}
+
+async function registerDealAfterDrawn() {
+    await game.settings.register(CardTilesConstants.MODULE_NAME, CardTilesConstants.Settings.DEAL_AFTER_DRAWN, {
+        name: game.i18n.localize("CardTiles.Settings.DealAfterDrawn.Name"),
+        hint: game.i18n.localize("CardTiles.Settings.DealAfterDrawn.Hint"),
+        scope: "world",
+        config: true,
+        type: Boolean,
+        default: false
     });
 }
 
