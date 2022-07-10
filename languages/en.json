@@ -15,5 +15,7 @@
     "CardTiles.Settings.DefaultWidth.Name" : "Default Card Width",
     "CardTiles.Settings.DefaultWidth.Hint" : "If both the card and its deck do not provide an explicit width value, this value will be used instead.",
     "CardTiles.Settings.DefaultHeight.Name" : "Default Card Height",
-    "CardTiles.Settings.DefaultHeight.Hint" : "If both the card and its deck do not provide an explicit height value, this value will be used instead."
+    "CardTiles.Settings.DefaultHeight.Hint" : "If both the card and its deck do not provide an explicit height value, this value will be used instead.",
+    "CardTiles.Settings.DealAfterDrawn.Name" : "Deal already drawn cards to canvas",
+    "CardTiles.Settings.DealAfterDrawn.Hint" : "This allows to deal cards already drawn to the canvas."
 }
