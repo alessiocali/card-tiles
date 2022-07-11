@@ -1,7 +1,7 @@
 { 
     "CardTiles.General.DefaulBoardStackName" : "Board Stack",
 
-    "CardTiles.Notifications.Warnings.CardAlreadyDrawn" : "You can't deal onto the canvas a card which has already been dealt (you can disable this in the settings).",
+    "CardTiles.Notifications.Warnings.CardAlreadyDrawn" : "You can't deal onto the canvas a card which has already been dealt from the same deck (you can disable this in the settings).",
 
     "CardTiles.Settings.Scaling.Name" : "Default Card Scaling",
     "CardTiles.Settings.Scaling.Hint" : "Set a default scaling to apply to all card tiles when generated.",
@@ -10,10 +10,10 @@
     "CardTiles.Settings.BoardStack.Name" : "Default Board Stack",
     "CardTiles.Settings.BoardStack.Hint" : "Cards that are played on the board are moved to this stack. If none is set, it will create one by default.",
     "CardTiles.Settings.BoardStack.DefaultBoardStackOption" : "None",
+    "CardTiles.Settings.DealAfterDrawn.Name" : "Play Drawn Deck Cards",
+    "CardTiles.Settings.DealAfterDrawn.Hint" : "If playing a card already in play from a deck, it will still be placed from the canvas. WARNING! This won't affect the board stack!",
     "CardTiles.Settings.DefaultWidth.Name" : "Default Card Width",
     "CardTiles.Settings.DefaultWidth.Hint" : "If both the card and its deck do not provide an explicit width value, this value will be used instead.",
     "CardTiles.Settings.DefaultHeight.Name" : "Default Card Height",
-    "CardTiles.Settings.DefaultHeight.Hint" : "If both the card and its deck do not provide an explicit height value, this value will be used instead.",
-    "CardTiles.Settings.DealAfterDrawn.Name" : "Deal already drawn cards to canvas",
-    "CardTiles.Settings.DealAfterDrawn.Hint" : "This allows to deal cards already drawn to the canvas."
+    "CardTiles.Settings.DefaultHeight.Hint" : "If both the card and its deck do not provide an explicit height value, this value will be used instead."
 }

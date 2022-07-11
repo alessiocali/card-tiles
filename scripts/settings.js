@@ -46,7 +46,7 @@ async function registerBoardStackSelector() {
 }
 
 async function registerDealAfterDrawn() {
-    await game.settings.register(CardTilesConstants.MODULE_NAME, CardTilesConstants.Settings.DEAL_AFTER_DRAWN, {
+    await game.settings.register(CardTilesConstants.MODULE_NAME, CardTilesConstants.Settings.DEAL_AFTER_DRAWN_FROM_DECK_NAME, {
         name: game.i18n.localize("CardTiles.Settings.DealAfterDrawn.Name"),
         hint: game.i18n.localize("CardTiles.Settings.DealAfterDrawn.Hint"),
         scope: "world",

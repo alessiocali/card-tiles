@@ -1,7 +1,7 @@
 { 
     "CardTiles.General.DefaulBoardStackName" : "Pila della Scena",
 
-    "CardTiles.Notifications.Warnings.CardAlreadyDrawn" : "Non puoi giocare una carta già giocata sulla scena (puoi disabilitare quest'opzione dalle impostazioni).",
+    "CardTiles.Notifications.Warnings.CardAlreadyDrawn" : "Non puoi giocare una carta già estratta dallo stesso mazzo sulla scena (puoi disabilitare quest'opzione dalle impostazioni).",
 
     "CardTiles.Settings.Scaling.Name" : "Fattore di scala",
     "CardTiles.Settings.Scaling.Hint" : "Imposta un fattore di scala da applicare a tutte le carte giocate sulla scena.",
@@ -10,6 +10,8 @@
     "CardTiles.Settings.BoardStack.Name" : "Pila della Scena",
     "CardTiles.Settings.BoardStack.Hint" : "Le carte giocate sulla scena vengono passate a questa pila. Se nessuna pila è stata scelta, ne viene generata una standard.",
     "CardTiles.Settings.BoardStack.DefaultBoardStackOption" : "Nessuna",
+    "CardTiles.Settings.DealAfterDrawn.Name" : "Gioca carte estratte dal mazzo",
+    "CardTiles.Settings.DealAfterDrawn.Hint" : "Permette di giocare la stessa carta più volte da uno stesso mazzo. ATTENZIONE! La carta non verrà spostata sulla Pila della Scena!",
     "CardTiles.Settings.DefaultWidth.Name" : "Larghezza Carte (Default)",
     "CardTiles.Settings.DefaultWidth.Hint" : "Se né la carta né la sua pila specificano un valore di larghezza, verrà utilizzato questo valore.",
     "CardTiles.Settings.DefaultHeight.Name" : "Altezza Carte (Default)",
