@@ -1,6 +1,15 @@
 import * as CardTilesConstants from "./constants.js"
 
-Hooks.once('ready', registerDragDropHandler);
+Hooks.once('ready', () => {
+    registerDragDropHandler()
+    //Request to place card on canvas accepted by the first GM:
+    warpgate.event.watch(`${CardTilesConstants.MODULE_NAME}-createTile`, onCanvasDropGM, isFirstGm)
+});
+
+//Function to check for the first active GM:
+function isFirstGm() {
+    return game.user.id === game.users.find(u => u.isGM && u.active)?.id
+}
 
 function registerDragDropHandler() {
     let dragDropConfig = {
@@ -14,26 +23,50 @@ function registerDragDropHandler() {
     new DragDrop(dragDropConfig).bind(board);
 }
 
-async function onCanvasDrop(event) {
+//Canvas drop function on the players account:
+function onCanvasDrop(event) {
     event.preventDefault();
-
+    /* Condition to prevent players placing cards without the first GM viewing this scene.
+     * Alternative solutions:
+     * - Checking for *any* GM viewing this scene and relaying it to this GM.
+     * - Passing the scene ID and placing the card on that scene.
+    */
+    if (game.user.viewedScene !== game.users.find(u => u.isGM && u.active).viewedScene) {
+        ui.notifications.warn(game.i18n.format("CardTiles.Notifications.Warnings.MissingGM", {gmName: game.users.find(u => u.isGM && u.active).name}));
+        return;
+    }
     const eventData = JSON.parse(event.dataTransfer.getData("text/plain"));
     if (eventData.type !== "Card") {
         canvas._dragDrop.callbacks.drop(event);
         return;
     }
-
     const globalPosition = canvas.stage.worldTransform.applyInverse({ x: event.x, y: event.y })
 
     const cardCollection = game.cards.get(eventData.cardsId);
     const card = cardCollection.cards.get(eventData.cardId);
-    const cardEventData = {
-        cardCollection : cardCollection,
-        card : card,
+    //Building data with IDs as required by warpgates event system:
+    const data = {
+        cardCollectionID : cardCollection.data._id,
+        cardID : card.data._id,
         x : globalPosition.x,
         y : globalPosition.y
     }
+    //Send notification accepted by the first active GM above:
+    warpgate.event.notify(`${CardTilesConstants.MODULE_NAME}-createTile`, data)
+}
 
+//Canvas drop function on the GMs account:
+async function onCanvasDropGM(data) {
+    //Building appropriate cardEventData with the data passed by warpgate:
+    const cardCollection = game.cards.get(data.cardCollectionID);
+    const card = cardCollection.cards.get(data.cardID);
+    const cardEventData = {
+        cardCollection : cardCollection,
+        card : card,
+        x : data.x,
+        y : data.y
+    }
+    //Rest as in card-tiles:
     const shouldPassToBoard = !isBoardStack(cardCollection) && game.settings.get(CardTilesConstants.MODULE_NAME, CardTilesConstants.Settings.PASS_CARDS_TO_BOARD_STACK);
     const isDrawnFromDeck = card.data.drawn && cardCollection.data.type === "deck";
     const dontDrawFromDeck = game.settings.get(CardTilesConstants.MODULE_NAME, CardTilesConstants.Settings.DEAL_AFTER_DRAWN_FROM_DECK_NAME) === false;
