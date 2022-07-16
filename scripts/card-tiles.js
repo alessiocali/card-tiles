@@ -34,17 +34,24 @@ async function onCanvasDrop(event) {
         y : globalPosition.y
     }
 
-    const shouldPassToBoard = game.settings.get(CardTilesConstants.MODULE_NAME, CardTilesConstants.Settings.PASS_CARDS_TO_BOARD_STACK);
-    if (shouldPassToBoard && card.data.drawn) {
+    const shouldPassToBoard = !isBoardStack(cardCollection) && game.settings.get(CardTilesConstants.MODULE_NAME, CardTilesConstants.Settings.PASS_CARDS_TO_BOARD_STACK);
+    const isDrawnFromDeck = card.data.drawn && cardCollection.data.type === "deck";
+    const dontDrawFromDeck = game.settings.get(CardTilesConstants.MODULE_NAME, CardTilesConstants.Settings.DEAL_AFTER_DRAWN_FROM_DECK_NAME) === false;
+    if (dontDrawFromDeck && isDrawnFromDeck) {
         ui.notifications.warn(game.i18n.localize("CardTiles.Notifications.Warnings.CardAlreadyDrawn"));
     }
-    else if (shouldPassToBoard && !card.drawn) {
+    else if (shouldPassToBoard && !isDrawnFromDeck) {
         await createCardTile(cardEventData);
         await moveCardToBoardStack(cardEventData);
     }
     else {
         await createCardTile(cardEventData);
     }
+}
+
+function isBoardStack(cardCollection) {
+    const boardStack = tryGetBoardStack();
+    return boardStack !== undefined && boardStack === cardCollection;
 }
 
 async function createCardTile(cardEventData) {
@@ -113,14 +120,17 @@ function getDefaultHeight(cardCollection) {
 
 async function moveCardToBoardStack(cardEventData) {
     const cardCollection = cardEventData.cardCollection;
-    const destination = await getBoardStack();
+    const destination = await getOrCreateBoardStack();
     cardCollection.pass(destination, [cardEventData.card.id]);
 }
 
-async function getBoardStack() {
+async function getOrCreateBoardStack() {
+    return tryGetBoardStack() || await createAndSetDefaultBoardStack();
+}
+
+function tryGetBoardStack() {
     const destinationId = game.settings.get(CardTilesConstants.MODULE_NAME, CardTilesConstants.Settings.BOARD_STACK_NAME);
-    const destination = game.cards.has(destinationId) ? game.cards.get(destinationId) : undefined;
-    return destination || await createAndSetDefaultBoardStack();
+    return game.cards.has(destinationId) ? game.cards.get(destinationId) : undefined;
 }
 
 async function createAndSetDefaultBoardStack() {
