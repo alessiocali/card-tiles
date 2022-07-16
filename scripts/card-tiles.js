@@ -57,7 +57,9 @@ function isBoardStack(cardCollection) {
 async function createCardTile(cardEventData) {
     const card = cardEventData.card;
     const cardCollection = cardEventData.cardCollection;
-    
+
+    // Back face is null rather than 0.
+    const faceIdx = card.data.face == null ? 0 : card.data.face + 1;    
     const monkFlags = {
         "active" : true,
         "restriction" : "all",
@@ -66,7 +68,9 @@ async function createCardTile(cardEventData) {
         "pertoken" : false,
         "minrequired" : 0,
         "chance" : 100,
-        "actions" : [ createCardCycleAction(card) ]
+        "actions" : [ createCardCycleAction(card) ],
+        "files" : buildFacesFiles(card),
+        "fileindex" : faceIdx
     };
 
     const scaling = game.settings.get(CardTilesConstants.MODULE_NAME, CardTilesConstants.Settings.SCALING_NAME) || 1.0;
@@ -87,27 +91,20 @@ async function createCardTile(cardEventData) {
 }
 
 function createCardCycleAction(card) {
-    // Back face is null rather than 0.
-    const faceIdx = card.data.face == null ? 0 : card.data.face + 1;
-
-    // Monk's images are 1-indexed
-    const imageIdx = faceIdx + 1;
-
     return {
-        "action" : "imagecycle",
+        "action" : "tileimage",
         "data" : {
             "entity" : "",
-            "imgat" : imageIdx,
-            "files" : buildFacesFiles(card)
+            "select" : "next",
+            "transition" : "none"
         },
-        "_file-list": "",
         "id": randomID(16)
     }
 }
 
 function buildFacesFiles(card) {
     const allFaces = [ card.back, card.data.faces ].flat();
-    return allFaces.map( face => { return { "id" : randomID(16), "name" : face.img  } } );
+    return allFaces.map( face => { return { "id" : randomID(16), "name" : face.img, "selected" : false  } } );
 }
 
 function getDefaultWidth(cardCollection) {
