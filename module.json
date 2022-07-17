@@ -16,6 +16,10 @@
     {
       "name": "monks-active-tiles",
       "manifest": "https://github.com/ironmonk88/monks-active-tiles/releases/latest/download/module.json"
+    },
+    {
+      "name": "warpgate",
+      "manifest": "https://github.com/trioderegion/warpgate/releases/latest/download/module.json"
     }
   ],
   "esmodules": [
