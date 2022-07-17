@@ -1,6 +1,9 @@
 import * as CardTilesConstants from "./constants.js"
 
-Hooks.once('ready', registerDragDropHandler);
+Hooks.once('ready', () => {
+    registerDragDropHandler();
+    registerCreateTileHook();
+});
 
 function registerDragDropHandler() {
     let dragDropConfig = {
@@ -14,7 +17,15 @@ function registerDragDropHandler() {
     new DragDrop(dragDropConfig).bind(board);
 }
 
-async function onCanvasDrop(event) {
+function registerCreateTileHook() {
+    warpgate.event.watch(CardTilesConstants.Events.WG_CREATE_CARD_TILE_EVENT, onCardTileCreateEvent, isCurrentUserFirstGm);
+}
+
+function isCurrentUserFirstGm() {
+    return game.user.id === game.users.find(u => u.isGM && u.active)?.id
+}
+
+function onCanvasDrop(event) {
     event.preventDefault();
 
     const eventData = JSON.parse(event.dataTransfer.getData("text/plain"));
@@ -23,15 +34,33 @@ async function onCanvasDrop(event) {
         return;
     }
 
-    const globalPosition = canvas.stage.worldTransform.applyInverse({ x: event.x, y: event.y })
+    const globalPosition = canvas.stage.worldTransform.applyInverse({ x: event.x, y: event.y });
 
     const cardCollection = game.cards.get(eventData.cardsId);
     const card = cardCollection.cards.get(eventData.cardId);
-    const cardEventData = {
-        cardCollection : cardCollection,
-        card : card,
+
+    const cardTileEventData = {
+        sceneID : game.user.viewedScene,
+        cardCollectionID : cardCollection.data._id,
+        cardID : card.data._id,
         x : globalPosition.x,
         y : globalPosition.y
+    }
+
+    warpgate.event.notify(CardTilesConstants.Events.WG_CREATE_CARD_TILE_EVENT, cardTileEventData);
+}
+
+async function onCardTileCreateEvent(cardTileEventData) {
+    const scene = game.scenes.get(cardTileEventData.sceneID);
+    const cardCollection = game.cards.get(cardTileEventData.cardCollectionID);
+    const card = cardCollection.cards.get(cardTileEventData.cardID);
+
+    const cardEventData = {
+        scene : scene,
+        cardCollection : cardCollection,
+        card : card,
+        x : cardTileEventData.x,
+        y : cardTileEventData.y
     }
 
     const shouldPassToBoard = !isBoardStack(cardCollection) && game.settings.get(CardTilesConstants.MODULE_NAME, CardTilesConstants.Settings.PASS_CARDS_TO_BOARD_STACK);
@@ -87,7 +116,7 @@ async function createCardTile(cardEventData) {
         flags : { "monks-active-tiles" : monkFlags }
     };
 
-    await canvas.scene.createEmbeddedDocuments("Tile", [ cardTileData ]);
+    await cardEventData.scene.createEmbeddedDocuments("Tile", [ cardTileData ]);
 }
 
 function createCardCycleAction(card) {
