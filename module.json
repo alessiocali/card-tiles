@@ -5,7 +5,7 @@
   "version": "0.0.1",
   "library": false,
   "minimumCoreVersion": "9",
-  "compatibleCoreVersion": "9.255",
+  "compatibleCoreVersion": "9.269",
   "authors": [
     {
       "name" : "Alessio Giuseppe Cali'",
