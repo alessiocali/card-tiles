@@ -28,16 +28,6 @@ function isCurrentUserFirstGm() {
 function onCanvasDrop(event) {
     event.preventDefault();
 
-    /* Condition to prevent players placing cards without the first GM viewing this scene.
-     * Alternative solutions:
-     * - Checking for *any* GM viewing this scene and relaying it to this GM.
-     * - Passing the scene ID and placing the card on that scene.
-    */
-    if (game.user.viewedScene !== game.users.find(u => u.isGM && u.active).viewedScene) {
-        ui.notifications.warn(game.i18n.format("CardTiles.Notifications.Warnings.MissingGM", {gmName: game.users.find(u => u.isGM && u.active).name}));
-        return;
-    }
-
     const eventData = JSON.parse(event.dataTransfer.getData("text/plain"));
     if (eventData.type !== "Card") {
         canvas._dragDrop.callbacks.drop(event);
@@ -50,6 +40,7 @@ function onCanvasDrop(event) {
     const card = cardCollection.cards.get(eventData.cardId);
 
     const cardTileEventData = {
+        sceneID : game.user.viewedScene,
         cardCollectionID : cardCollection.data._id,
         cardID : card.data._id,
         x : globalPosition.x,
@@ -60,10 +51,12 @@ function onCanvasDrop(event) {
 }
 
 async function onCardTileCreateEvent(cardTileEventData) {
+    const scene = game.scenes.get(cardTileEventData.sceneID);
     const cardCollection = game.cards.get(cardTileEventData.cardCollectionID);
     const card = cardCollection.cards.get(cardTileEventData.cardID);
 
     const cardEventData = {
+        scene : scene,
         cardCollection : cardCollection,
         card : card,
         x : cardTileEventData.x,
@@ -123,7 +116,7 @@ async function createCardTile(cardEventData) {
         flags : { "monks-active-tiles" : monkFlags }
     };
 
-    await canvas.scene.createEmbeddedDocuments("Tile", [ cardTileData ]);
+    await cardEventData.scene.createEmbeddedDocuments("Tile", [ cardTileData ]);
 }
 
 function createCardCycleAction(card) {
