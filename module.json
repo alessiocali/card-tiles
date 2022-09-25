@@ -1,15 +1,18 @@
 {
-  "name": "card-tiles",
+  "id": "card-tiles",
   "title": "Card Tiles",
   "description": "Makes use of Monk's Active Tiles to create an interactable Card tile from your Card collections.",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "library": false,
-  "minimumCoreVersion": "9",
-  "compatibleCoreVersion": "9.269",
+  "minimumCoreVersion": "10",
+  "compatibleCoreVersion": "10.285",
   "authors": [
     {
-      "name" : "Alessio Giuseppe Cali'",
+      "name": "Alessio Giuseppe Cali'",
       "url": "https://github.com/alessiocali/"
+    },
+    {
+      "name": "Kirwiisp"
     }
   ],
   "dependencies": [
@@ -32,6 +35,11 @@
       "lang": "en",
       "name": "English",
       "path": "./languages/en.json"
+    },
+    {
+      "lang": "fr",
+      "name": "Français",
+      "path": "./languages/fr.json"
     },
     {
       "lang": "it",
