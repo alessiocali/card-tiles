@@ -4,8 +4,8 @@
   "description": "Makes use of Monk's Active Tiles to create an interactable Card tile from your Card collections.",
   "version": "0.0.1",
   "library": false,
-  "minimumCoreVersion": "9",
-  "compatibleCoreVersion": "9.269",
+  "minimumCoreVersion": "10",
+  "compatibleCoreVersion": "10.291",
   "authors": [
     {
       "name" : "Alessio Giuseppe Cali'",

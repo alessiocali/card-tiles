@@ -36,13 +36,9 @@ function onCanvasDrop(event) {
 
     const globalPosition = canvas.stage.worldTransform.applyInverse({ x: event.x, y: event.y });
 
-    const cardCollection = game.cards.get(eventData.cardsId);
-    const card = cardCollection.cards.get(eventData.cardId);
-
     const cardTileEventData = {
         sceneID : game.user.viewedScene,
-        cardCollectionID : cardCollection.data._id,
-        cardID : card.data._id,
+        cardID : eventData.uuid,
         x : globalPosition.x,
         y : globalPosition.y
     }
@@ -52,8 +48,8 @@ function onCanvasDrop(event) {
 
 async function onCardTileCreateEvent(cardTileEventData) {
     const scene = game.scenes.get(cardTileEventData.sceneID);
-    const cardCollection = game.cards.get(cardTileEventData.cardCollectionID);
-    const card = cardCollection.cards.get(cardTileEventData.cardID);
+    const card = await fromUuid(cardTileEventData.cardID);
+    const cardCollection = card.parent;
 
     const cardEventData = {
         scene : scene,
@@ -64,7 +60,7 @@ async function onCardTileCreateEvent(cardTileEventData) {
     }
 
     const shouldPassToBoard = !isBoardStack(cardCollection) && game.settings.get(CardTilesConstants.MODULE_NAME, CardTilesConstants.Settings.PASS_CARDS_TO_BOARD_STACK);
-    const isDrawnFromDeck = card.data.drawn && cardCollection.data.type === "deck";
+    const isDrawnFromDeck = card.drawn && cardCollection.type === "deck";
     const dontDrawFromDeck = game.settings.get(CardTilesConstants.MODULE_NAME, CardTilesConstants.Settings.DEAL_AFTER_DRAWN_FROM_DECK_NAME) === false;
     if (dontDrawFromDeck && isDrawnFromDeck) {
         ui.notifications.warn(game.i18n.localize("CardTiles.Notifications.Warnings.CardAlreadyDrawn"));
@@ -88,9 +84,10 @@ async function createCardTile(cardEventData) {
     const cardCollection = cardEventData.cardCollection;
 
     // Back face is null rather than 0.
-    const faceIdx = card.data.face == null ? 0 : card.data.face + 1;    
+    const faceIdx = card.face == null ? 0 : card.face + 1;    
     const monkFlags = {
         "active" : true,
+        "allowpaused" : true,
         "restriction" : "all",
         "controlled" : "all",
         "trigger" : "click",
@@ -103,15 +100,15 @@ async function createCardTile(cardEventData) {
     };
 
     const scaling = game.settings.get(CardTilesConstants.MODULE_NAME, CardTilesConstants.Settings.SCALING_NAME) || 1.0;
-    const width = (card.data.width || getDefaultWidth(cardCollection)) * scaling;
-    const height = (card.data.height || getDefaultHeight(cardCollection)) * scaling;
+    const width = (card.width || getDefaultWidth(cardCollection)) * scaling;
+    const height = (card.height || getDefaultHeight(cardCollection)) * scaling;
 
     const cardTileData = {
         x : cardEventData.x - width / 2,
         y : cardEventData.y - height / 2,
         width : width,
         height : height,
-        img : card.face?.img || card.back.img,
+        texture : { src: card.currentFace?.img || card.back.img },
         hidden : false,
         flags : { "monks-active-tiles" : monkFlags }
     };
@@ -132,16 +129,16 @@ function createCardCycleAction(card) {
 }
 
 function buildFacesFiles(card) {
-    const allFaces = [ card.back, card.data.faces ].flat();
+    const allFaces = [ card.back, card.faces ].flat();
     return allFaces.map( face => { return { "id" : randomID(16), "name" : face.img, "selected" : false  } } );
 }
 
 function getDefaultWidth(cardCollection) {
-    return cardCollection.data.width || game.settings.get(CardTilesConstants.MODULE_NAME, CardTilesConstants.Settings.DEFAULT_WIDTH_NAME) || 100;
+    return cardCollection.width || game.settings.get(CardTilesConstants.MODULE_NAME, CardTilesConstants.Settings.DEFAULT_WIDTH_NAME) || 100;
 }
 
 function getDefaultHeight(cardCollection) {
-    return cardCollection.data.heigh || game.settings.get(CardTilesConstants.MODULE_NAME, CardTilesConstants.Settings.DEFAULT_HEIGHT_NAME) || 100;
+    return cardCollection.heigh || game.settings.get(CardTilesConstants.MODULE_NAME, CardTilesConstants.Settings.DEFAULT_HEIGHT_NAME) || 100;
 }
 
 async function moveCardToBoardStack(cardEventData) {
