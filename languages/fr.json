@@ -1,0 +1,19 @@
+{
+    "CardTiles.General.DefaulBoardStackName": "Pioche de la scène",
+
+    "CardTiles.Notifications.Warnings.CardAlreadyDrawn": "Vous ne pouvez pas distribuer une carte qui a déjà été distribuée (vous pouvez modifier cette ce paramètre dans les options).",
+
+    "CardTiles.Settings.Scaling.Name": "Taille de carte par défaut",
+    "CardTiles.Settings.Scaling.Hint": "Définir une taille par défaut qui s'appliquera à chaques cartes lors de leur création.",
+    "CardTiles.Settings.PassCardToBoardStack.Name": "Passer une carte dans la pioche de la scène",
+    "CardTiles.Settings.PassCardToBoardStack.Hint": "Si coché, les cartes déposées sur la scène seront ajouté à la pioche sélectionnée",
+    "CardTiles.Settings.BoardStack.Name": "Pioche par défaut de la scène",
+    "CardTiles.Settings.BoardStack.Hint": "Les cartes déposés sur la scène seront ajouter à la pioche par défaut de la scène. Si aucune pioche n'est définie, une pioche sera créée par défaut.",
+    "CardTiles.Settings.BoardStack.DefaultBoardStackOption": "Aucune",
+    "CardTiles.Settings.DealAfterDrawn.Name": "Jouer carte déjà distribuée",
+    "CardTiles.Settings.DealAfterDrawn.Hint": "Si vous jouez une carte déjà en jeu depuis une pioche, elle sera quand même placée sur la scène. ATTENTION ! Cela n'impactera pas la pioche de la scène !",
+    "CardTiles.Settings.DefaultWidth.Name": "Largeur de carte par défaut",
+    "CardTiles.Settings.DefaultWidth.Hint": "Si la carte et la pioche ne fournissent pas de largeur, cette valeur sera utilisée par défaut.",
+    "CardTiles.Settings.DefaultHeight.Name": "Hauteur de carte par défaut",
+    "CardTiles.Settings.DefaultHeight.Hint": "Si la carte et la pioche ne fournissent pas de hauteur, cette valeur sera utilisée par défaut."
+}

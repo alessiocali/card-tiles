@@ -8,8 +8,20 @@
   "compatibleCoreVersion": "10.291",
   "authors": [
     {
-      "name" : "Alessio Giuseppe Cali'",
+      "name": "Alessio Giuseppe Cali'",
       "url": "https://github.com/alessiocali/"
+    },
+    {
+      "name": "Kirwiisp",
+      "url": "https://github.com/Kirwiisp"
+    },
+    { 
+      "name": "BrotherSharper",
+      "url": "https://github.com/BrotherSharper"
+    },
+    {
+      "name": "SalieriC",
+      "url": "https://github.com/SalieriC"
     }
   ],
   "dependencies": [
@@ -32,6 +44,11 @@
       "lang": "en",
       "name": "English",
       "path": "./languages/en.json"
+    },
+    {
+      "lang": "fr",
+      "name": "Français",
+      "path": "./languages/fr.json"
     },
     {
       "lang": "it",
