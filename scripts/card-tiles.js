@@ -138,7 +138,7 @@ function getDefaultWidth(cardCollection) {
 }
 
 function getDefaultHeight(cardCollection) {
-    return cardCollection.heigh || game.settings.get(CardTilesConstants.MODULE_NAME, CardTilesConstants.Settings.DEFAULT_HEIGHT_NAME) || 100;
+    return cardCollection.height || game.settings.get(CardTilesConstants.MODULE_NAME, CardTilesConstants.Settings.DEFAULT_HEIGHT_NAME) || 100;
 }
 
 async function moveCardToBoardStack(cardEventData) {
