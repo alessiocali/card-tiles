@@ -30,7 +30,7 @@ function onCanvasDrop(event) {
 
     const eventData = JSON.parse(event.dataTransfer.getData("text/plain"));
     if (eventData.type !== "Card") {
-        canvas._dragDrop.callbacks.drop(event);
+        canvas._onDrop(event);
         return;
     }
 
