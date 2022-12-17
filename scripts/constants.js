@@ -7,6 +7,7 @@ export const Settings = {
     DEFAULT_WIDTH_NAME : "default-card-width",
     DEFAULT_HEIGHT_NAME : "default-card-height",
     DEAL_AFTER_DRAWN_FROM_DECK_NAME: "deal-after-drawn-from-deck",
+    MOVE_THAT_FOR_YOU_NAME: "move-that-for-you"
 }
 
 export const Events = {
