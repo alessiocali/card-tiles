@@ -98,16 +98,10 @@ async function createCardTile(cardEventData) {
         "files" : buildFacesFiles(card),
         "fileindex" : faceIdx
     };
+
     const moveThatForYouPermission = game.settings.get(CardTilesConstants.MODULE_NAME, CardTilesConstants.Settings.MOVE_THAT_FOR_YOU_NAME)
-    let allowMove = false
-    let allowRotate = false
-    if (moveThatForYouPermission === "both") {
-        allowMove = true
-        allowRotate = true
-    } else if (moveThatForYouPermission === "movement" || moveThatForYouPermission === "rotation") {
-        allowMove = moveThatForYouPermission === "movement" ? true : false
-        allowRotate = moveThatForYouPermission === "rotation" ? true : false
-    }
+    let allowMove = moveThatForYouPermission === CardTilesConstants.MoveThatForYou.PERMISSION_MOVEMENT || moveThatForYouPermission === CardTilesConstants.MoveThatForYou.PERMISSION_BOTH
+    let allowRotate = moveThatForYouPermission === CardTilesConstants.MoveThatForYou.PERMISSION_ROTATION || moveThatForYouPermission === CardTilesConstants.MoveThatForYou.PERMISSION_BOTH
     const moveThatForYouFlags = {
         "allowPlayerMove": allowMove,
         "allowPlayerRotate": allowRotate

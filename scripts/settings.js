@@ -97,10 +97,10 @@ async function registerMoveThatForYouSettings() {
         type: String,
         default: "",
         choices: {
-            "none" : game.i18n.localize("CardTiles.Settings.MoveThatForYou.None"),
-            "movement" : game.i18n.localize("CardTiles.Settings.MoveThatForYou.MovementOnly"),
-            "rotation" : game.i18n.localize("CardTiles.Settings.MoveThatForYou.RotationOnly"),
-            "both" : game.i18n.localize("CardTiles.Settings.MoveThatForYou.Both")
+            [CardTilesConstants.MoveThatForYou.PERMISSION_NONE] : game.i18n.localize("CardTiles.Settings.MoveThatForYou.None"),
+            [CardTilesConstants.MoveThatForYou.PERMISSION_MOVEMENT] : game.i18n.localize("CardTiles.Settings.MoveThatForYou.MovementOnly"),
+            [CardTilesConstants.MoveThatForYou.PERMISSION_ROTATION] : game.i18n.localize("CardTiles.Settings.MoveThatForYou.RotationOnly"),
+            [CardTilesConstants.MoveThatForYou.PERMISSION_BOTH] : game.i18n.localize("CardTiles.Settings.MoveThatForYou.Both")
         }
     });
 }

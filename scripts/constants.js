@@ -10,6 +10,13 @@ export const Settings = {
     MOVE_THAT_FOR_YOU_NAME: "move-that-for-you"
 }
 
+export const MoveThatForYou = {
+    PERMISSION_NONE : "none",
+    PERMISSION_MOVEMENT : "movement",
+    PERMISSION_ROTATION : "rotation",
+    PERMISSION_BOTH : "both"
+}
+
 export const Events = {
     WG_CREATE_CARD_TILE_EVENT : "card-tiles-wg-create-card-tile"
 }

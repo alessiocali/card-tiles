@@ -15,5 +15,11 @@
     "CardTiles.Settings.DefaultWidth.Name" : "Larghezza Carte (Default)",
     "CardTiles.Settings.DefaultWidth.Hint" : "Se né la carta né la sua pila specificano un valore di larghezza, verrà utilizzato questo valore.",
     "CardTiles.Settings.DefaultHeight.Name" : "Altezza Carte (Default)",
-    "CardTiles.Settings.DefaultHeight.Hint" : "Se né la carta né la sua pila specificano un valore di altezza, verrà utilizzato questo valore."
+    "CardTiles.Settings.DefaultHeight.Hint" : "Se né la carta né la sua pila specificano un valore di altezza, verrà utilizzato questo valore.",
+    "CardTiles.Settings.MoveThatForYou.Name": "Supporto per \"Move That For You\"",
+    "CardTiles.Settings.MoveThatForYou.Hint": "Se il modulo \"Move That For You\" è installato e attivo, puoi modificare i permessi per permettere ai giocatori di muovere le carte. Carte già posizionate sulla scena non saranno influenzate.",
+    "CardTiles.Settings.MoveThatForYou.None": "Nessuno",
+    "CardTiles.Settings.MoveThatForYou.MovementOnly": "Solo posizione",
+    "CardTiles.Settings.MoveThatForYou.RotationOnly": "Solo rotazione",
+    "CardTiles.Settings.MoveThatForYou.Both": "Posizione e rotazione"
 }
