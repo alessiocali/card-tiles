@@ -8,6 +8,7 @@ async function registerSettings() {
     await registerBoardStackSelector();
     await registerDealAfterDrawn()
     await registerDefaultCardSizes();
+    await registerMoveThatForYouSettings()
 }
 
 async function registerScaling() {
@@ -84,5 +85,22 @@ async function registerDefaultCardSizes() {
         config: true,
         type: Number,
         default: 100
+    });
+}
+
+async function registerMoveThatForYouSettings() {
+    await game.settings.register(CardTilesConstants.MODULE_NAME, CardTilesConstants.Settings.MOVE_THAT_FOR_YOU_NAME, {
+        name: game.i18n.localize("CardTiles.Settings.MoveThatForYou.Name"),
+        hint: game.i18n.localize("CardTiles.Settings.MoveThatForYou.Hint"),
+        scope: "world",
+        config: true,
+        type: String,
+        default: "",
+        choices: {
+            [CardTilesConstants.MoveThatForYou.PERMISSION_NONE] : game.i18n.localize("CardTiles.Settings.MoveThatForYou.None"),
+            [CardTilesConstants.MoveThatForYou.PERMISSION_MOVEMENT] : game.i18n.localize("CardTiles.Settings.MoveThatForYou.MovementOnly"),
+            [CardTilesConstants.MoveThatForYou.PERMISSION_ROTATION] : game.i18n.localize("CardTiles.Settings.MoveThatForYou.RotationOnly"),
+            [CardTilesConstants.MoveThatForYou.PERMISSION_BOTH] : game.i18n.localize("CardTiles.Settings.MoveThatForYou.Both")
+        }
     });
 }

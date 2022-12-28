@@ -15,5 +15,11 @@
     "CardTiles.Settings.DefaultWidth.Name" : "Default Card Width",
     "CardTiles.Settings.DefaultWidth.Hint" : "If both the card and its deck do not provide an explicit width value, this value will be used instead.",
     "CardTiles.Settings.DefaultHeight.Name" : "Default Card Height",
-    "CardTiles.Settings.DefaultHeight.Hint" : "If both the card and its deck do not provide an explicit height value, this value will be used instead."
+    "CardTiles.Settings.DefaultHeight.Hint" : "If both the card and its deck do not provide an explicit height value, this value will be used instead.",
+    "CardTiles.Settings.MoveThatForYou.Name": "Move That For You Support",
+    "CardTiles.Settings.MoveThatForYou.Hint": "If the \"Move That For You\" module is installed and active in this world, you can adjust the players permissions to move card tiles here. Already created card tiles are not affected.",
+    "CardTiles.Settings.MoveThatForYou.None": "None",
+    "CardTiles.Settings.MoveThatForYou.MovementOnly": "Movement only",
+    "CardTiles.Settings.MoveThatForYou.RotationOnly": "Rotation only",
+    "CardTiles.Settings.MoveThatForYou.Both": "Rotation and Movement"
 }

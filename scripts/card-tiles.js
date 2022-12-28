@@ -99,6 +99,14 @@ async function createCardTile(cardEventData) {
         "fileindex" : faceIdx
     };
 
+    const moveThatForYouPermission = game.settings.get(CardTilesConstants.MODULE_NAME, CardTilesConstants.Settings.MOVE_THAT_FOR_YOU_NAME)
+    let allowMove = moveThatForYouPermission === CardTilesConstants.MoveThatForYou.PERMISSION_MOVEMENT || moveThatForYouPermission === CardTilesConstants.MoveThatForYou.PERMISSION_BOTH
+    let allowRotate = moveThatForYouPermission === CardTilesConstants.MoveThatForYou.PERMISSION_ROTATION || moveThatForYouPermission === CardTilesConstants.MoveThatForYou.PERMISSION_BOTH
+    const moveThatForYouFlags = {
+        "allowPlayerMove": allowMove,
+        "allowPlayerRotate": allowRotate
+    }
+
     const scaling = game.settings.get(CardTilesConstants.MODULE_NAME, CardTilesConstants.Settings.SCALING_NAME) || 1.0;
     const width = (card.width || getDefaultWidth(cardCollection)) * scaling;
     const height = (card.height || getDefaultHeight(cardCollection)) * scaling;
@@ -110,7 +118,10 @@ async function createCardTile(cardEventData) {
         height : height,
         texture : { src: card.currentFace?.img || card.back.img },
         hidden : false,
-        flags : { "monks-active-tiles" : monkFlags }
+        flags : {
+            "monks-active-tiles" : monkFlags,
+            "move-that-for-you" : moveThatForYouFlags
+        }
     };
 
     await cardEventData.scene.createEmbeddedDocuments("Tile", [ cardTileData ]);
